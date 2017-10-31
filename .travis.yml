@@ -1,3 +1,4 @@
+
 language: android
 jdk: oraclejdk8
 
@@ -33,8 +34,8 @@ before_install:
 script:
   - travis_wait 30
   - cd --
-  - git clone https://github.com/manjotsidhu/DualBootPatcher manjot/DualBootPatcher/
-  - cd $PWD/manjot/DualBootPatcher/
+  - git clone https://github.com/manjotsidhu/DualBootPatcher manjotsidhu/DualBootPatcher/
+  - cd $PWD/manjotsidhu/DualBootPatcher/
   - git submodule update --init --recursive
   - mkdir build
   - cd build/
@@ -48,7 +49,7 @@ deploy:
   provider: releases
   user: "$manjot_v1"
   password: "$manjot_v2"
-  file: "$PWD/manjot/DualBootPatcher/Android_GUI/build/outputs/apk/Android_GUI-debug.apk"
+  file: "$PWD/manjotsidhu/DualBootPatcher/Android_GUI/build/outputs/apk/Android_GUI-debug.apk"
   skip_cleanup: true
   on:
     tags: true
