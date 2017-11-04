@@ -19,6 +19,8 @@
 
 #include "mbcommon/file_error.h"
 
+#include <string>
+
 namespace mb
 {
 
@@ -28,15 +30,8 @@ struct FileErrorCategory : std::error_category
 
     std::string message(int ev) const override;
 
-    virtual std::error_condition
+    std::error_condition
     default_error_condition(int code) const noexcept override;
-
-    //virtual bool
-    //equivalent(int code,
-    //           const std::error_condition &condition) const noexcept override;
-    //virtual bool
-    //equivalent(const std::error_code &code,
-    //           int condition) const noexcept override;
 };
 
 struct FileErrorCCategory : std::error_category
@@ -52,9 +47,9 @@ const char * FileErrorCategory::name() const noexcept
     return "file_error";
 }
 
-std::string FileErrorCategory::message(int condition) const
+std::string FileErrorCategory::message(int ev) const
 {
-    switch (static_cast<FileError>(condition)) {
+    switch (static_cast<FileError>(ev)) {
     case FileError::ArgumentOutOfRange:
         return "argument out of range";
     case FileError::CannotConvertEncoding:
@@ -109,9 +104,9 @@ const char * FileErrorCCategory::name() const noexcept
     return "file_errorc";
 }
 
-std::string FileErrorCCategory::message(int ec) const
+std::string FileErrorCCategory::message(int ev) const
 {
-    switch (static_cast<FileErrorC>(ec)) {
+    switch (static_cast<FileErrorC>(ev)) {
     case FileErrorC::InvalidArgument:
         return "invalid argument";
     case FileErrorC::InvalidState:
